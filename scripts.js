@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app', ['ngRoute'])
+  angular.module('app', ['ui.router'])
     .controller('InterviewCtrl', InterviewCtrl)
     .controller('FaqCtrl', FaqCtrl)
     .factory('InterviewService', InterviewService)
@@ -7,30 +7,29 @@
     .directive('headerDirective', headerDirective)
     .config(config);
 
-  InterviewCtrl.$inject = ['InterviewService'];
+  InterviewCtrl.$inject = ['$scope', 'InterviewService'];
   FaqCtrl.$inject = ['FaqService'];
-  config.$inject = ['$routeProvider'];
+  config.$inject = ['$stateProvider'];
 
 
-  function config($routeProvider) {
-    $routeProvider
-      .when('/interview', {
+  function config($stateProvider) {
+    $stateProvider
+      .state('interview', {
+        url: '/interview',
         templateUrl: 'interviewPartial.html',
         controller: 'InterviewCtrl'
       })
-      .when('/faq', {
+      .state('faq', {
+        url: '/faq',
         templateUrl: 'faqPartial.html',
         controller: 'FaqCtrl'
-      })
-      .otherwise({
-        redirectTo: '/interview',
-        controller: 'InterviewCtrl'
       });
   };
 
-  function InterviewCtrl(InterviewService) {
+  function InterviewCtrl($scope, InterviewService) {
     var vm = this;
     vm.pagename = "Interviews";
+    $scope.pagename = "Interviews"
     vm.service = InterviewService;
     console.log(vm.service.collection);
   };
