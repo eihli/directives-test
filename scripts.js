@@ -74,6 +74,10 @@
 
   function headerDirective() {
     return {
+      scope: {
+        pagename: '=',
+        service: '='
+      },
       templateUrl: 'header.html'
     };
   };
