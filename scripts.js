@@ -17,19 +17,18 @@
       .state('interview', {
         url: '/interview',
         templateUrl: 'interviewPartial.html',
-        controller: 'InterviewCtrl'
+        controller: 'InterviewCtrl as interview'
       })
       .state('faq', {
         url: '/faq',
         templateUrl: 'faqPartial.html',
-        controller: 'FaqCtrl'
+        controller: 'FaqCtrl as faq'
       });
   };
 
   function InterviewCtrl($scope, InterviewService) {
     var vm = this;
     vm.pagename = "Interviews";
-    $scope.pagename = "Interviews"
     vm.service = InterviewService;
     console.log(vm.service.collection);
   };
